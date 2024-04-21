@@ -33,36 +33,54 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
+    // public static void main(String[] args) {
+    //     SalesReader reader = new SalesReader();
+
+    //     try {
+    //         reader.readData("http://localhost/cars.json");
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+
+    //     // Aggregate data using the specified binary key (1100) - Year and Region
+    //     HashMap<String, Integer> yearQty = SalesAnalysis.aggregateData(reader.salesData, " ", Integer.parseInt("1110", 2));
+
+    //     // Create a TreeMap from the HashMap to sort the keys alphabetically
+    //     TreeMap<String, Integer> sortedYearQty = new TreeMap<>(yearQty);
+
+    //     for (Map.Entry<String, Integer> entry : sortedYearQty.entrySet()) {
+    //         System.out.println(entry.getKey() + ": " + entry.getValue());
+    //     }
+
+    //     System.out.println();
+
+    //     // Calculate summary statistics from the hash map's values
+    //     Collection<Integer> values = yearQty.values();
+    //     Map<String, Float> summary = SalesAnalysis.calculateSummary(new ArrayList<>(values));
+
+    //     System.out.println("Summary Statistics:");
+    //     for (Map.Entry<String, Float> entry : summary.entrySet()) {
+    //         System.out.println(entry.getKey() + ": " + entry.getValue());
+    //     }
+        
+    //     System.out.println();
+
+    //     List<Float> quantities = new ArrayList<>();
+    //     for (SalesRecord record : reader.salesData) {
+    //         quantities.add((float) record.Quantity);
+    //     }
+
+    //     // Calculate summary statistics from the quantities
+    //     summary = SalesAnalysis.calculateSummary(quantities);
+
+    //     // Print the summary statistics
+    //     System.out.println("Overall Summary Statistics:");
+    //     for (Map.Entry<String, Float> entry : summary.entrySet()) {
+    //         System.out.println(entry.getKey() + ": " + entry.getValue());
+    //     }
+    // }
+
     public static void main(String[] args) {
-        SalesReader reader = new SalesReader();
-
-        try {
-            reader.readData("http://localhost/cars.json");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Aggregate data using the specified binary key (1100) - Year and Region
-        HashMap<String, Integer> yearQty = SalesAnalysis.aggregateData(reader.salesData, Integer.parseInt("1100", 2));
-
-        // Create a TreeMap from the HashMap to sort the keys alphabetically
-        TreeMap<String, Integer> sortedYearQty = new TreeMap<>(yearQty);
-
-        for (Map.Entry<String, Integer> entry : sortedYearQty.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
-
-        System.out.println();
-
-        // Calculate summary statistics from the hash map's values
-        Collection<Integer> values = yearQty.values();
-        Map<String, Float> summary = SalesAnalysis.calculateSummary(new ArrayList<>(values));
-
-        System.out.println("Summary Statistics:");
-        for (Map.Entry<String, Float> entry : summary.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
-
-
+        launch();
     }
 }

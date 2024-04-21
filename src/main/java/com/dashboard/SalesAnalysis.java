@@ -35,8 +35,10 @@ public class SalesAnalysis {
             // If the list has an odd length, the median is the middle element
             median = sortedQuantities.get(size / 2).floatValue();
         } else {
-            // If the list has an even length, the median is the average of the two middle elements
-            median = (sortedQuantities.get(size / 2 - 1).floatValue() + sortedQuantities.get(size / 2).floatValue()) / 2;
+            // If the list has an even length, the median is the average of the two middle
+            // elements
+            median = (sortedQuantities.get(size / 2 - 1).floatValue() + sortedQuantities.get(size / 2).floatValue())
+                    / 2;
         }
 
         // Create a map to store the summary statistics
@@ -52,59 +54,64 @@ public class SalesAnalysis {
 
     // Aggregate data function
     public static HashMap<String, Integer> aggregateData(
-        ArrayList<SalesRecord> salesData,
-        int aggregateBy) {
-        
+            ArrayList<SalesRecord> salesData, String delim,
+            int aggregateBy) {
+
+        // Set the default delimiter if not provided
+        if (delim == null) {
+            delim = " ";
+        }
+
         // Convert aggregateBy to a binary string
         String binaryString = Integer.toBinaryString(aggregateBy);
-        
+
         // Pad the binary string with leading zeros to ensure it is 4 bits long
         binaryString = String.format("%4s", binaryString).replace(' ', '0');
-        
+
         // Map to store the aggregated quantities
         HashMap<String, Integer> qtyMap = new HashMap<>();
 
-        int sum = 0;
-        
         // Iterate through sales data
         for (SalesRecord record : salesData) {
             StringBuilder keyBuilder = new StringBuilder();
-            
-            if (binaryString.charAt(0) == '1') {
-                keyBuilder.append(record.Year);
+
+            String[] keys = new String[] {
+                    "" + record.Year, // Convert Year to String
+                    "Q" + record.QTR, // Combine 'Q' with the quarter
+                    record.Region, // Add the Region directly
+                    record.Vehicle // Add the Vehicle directly
+            };
+
+            // List to store the key parts
+            List<String> keyParts = new ArrayList<>();
+
+            // Iterate over the binary string and the keys array
+            for (int i = 0; i < binaryString.length(); i++) {
+                // If the binary string has a '1' at this position, add the corresponding key
+                // part
+                if (binaryString.charAt(i) == '1') {
+                    keyParts.add(keys[i]);
+                }
             }
-            
-            if (binaryString.charAt(1) == '1') {
-                keyBuilder.append(" Q").append(record.QTR);
-            }
-            
-            if (binaryString.charAt(2) == '1') {
-                keyBuilder.append(" ").append(record.Region);
-            }
-            
-            if (binaryString.charAt(3) == '1') {
-                keyBuilder.append(" ").append(record.Vehicle);
-            }
-            
-            // Generate the key
-            String key = keyBuilder.toString().trim();
-            
+
+            // Join the key parts with a space to form the final key
+            String key = String.join(delim, keyParts);
+
             // If the key is empty, set it to "Total"
             if (key.isEmpty()) {
                 key = "Total Sales";
             }
-            
+
             // Get the current quantity for the generated key, defaulting to 0
             int currentQty = qtyMap.getOrDefault(key, 0);
-            
+
             // Add the record's quantity to the current quantity
             currentQty += record.Quantity;
-            sum += record.Quantity;
-            
+
             // Update the map with the new quantity
             qtyMap.put(key, currentQty);
         }
-        
+
         return qtyMap;
     }
 }

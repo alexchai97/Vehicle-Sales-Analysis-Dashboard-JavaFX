@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dashboard.Controller">
-   <children>
-      <Label text="Primary View" />
-      <Button fx:id="primaryButton" text="Switch to Secondary View"/>
-   </children>
+<GridPane alignment="TOP_CENTER" hgap="16.0" prefHeight="768.0" prefWidth="1366.0" vgap="16.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dashboard.PrimaryController">
+   <columnConstraints>
+      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
+      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
+      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
+      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
+      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
+      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="85.0" minHeight="4.0" percentHeight="16.78" prefHeight="29.0" />
+      <RowConstraints maxHeight="83.0" minHeight="2.0" percentHeight="16.78" prefHeight="54.0" />
+      <RowConstraints percentHeight="16.78" />
+      <RowConstraints percentHeight="16.78" />
+      <RowConstraints percentHeight="16.78" />
+      <RowConstraints maxHeight="800.0" minHeight="400.0" percentHeight="16.78" prefHeight="700.0" />
+   </rowConstraints>
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets bottom="32.0" left="48.0" right="48.0" top="32.0" />
    </padding>
-</VBox>
+</GridPane>
