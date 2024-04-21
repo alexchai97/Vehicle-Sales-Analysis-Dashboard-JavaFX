@@ -1,28 +1,282 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<GridPane alignment="TOP_CENTER" hgap="16.0" prefHeight="768.0" prefWidth="1366.0" vgap="16.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dashboard.PrimaryController">
+<GridPane alignment="TOP_CENTER" hgap="16.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" vgap="16.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dashboard.Controller">
    <columnConstraints>
-      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
-      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
-      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
-      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
-      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
-      <ColumnConstraints minWidth="0.0" percentWidth="17.0" prefWidth="0.0" />
+      <ColumnConstraints percentWidth="16.7" />
+      <ColumnConstraints percentWidth="16.7" />
+      <ColumnConstraints percentWidth="16.7" />
+      <ColumnConstraints percentWidth="16.7" />
+      <ColumnConstraints percentWidth="16.7" />
+      <ColumnConstraints percentWidth="16.7" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints maxHeight="85.0" minHeight="4.0" percentHeight="16.78" prefHeight="29.0" />
-      <RowConstraints maxHeight="83.0" minHeight="2.0" percentHeight="16.78" prefHeight="54.0" />
-      <RowConstraints percentHeight="16.78" />
-      <RowConstraints percentHeight="16.78" />
-      <RowConstraints percentHeight="16.78" />
-      <RowConstraints maxHeight="800.0" minHeight="400.0" percentHeight="16.78" prefHeight="700.0" />
+      <RowConstraints percentHeight="10.0" />
+      <RowConstraints percentHeight="1.0" />
+      <RowConstraints percentHeight="30.0" />
+      <RowConstraints maxHeight="239.0" minHeight="157.0" percentHeight="35.0" prefHeight="157.0" />
+      <RowConstraints percentHeight="35.0" />
    </rowConstraints>
    <padding>
       <Insets bottom="32.0" left="48.0" right="48.0" top="32.0" />
    </padding>
+   <children>
+      <GridPane prefWidth="198.0" GridPane.columnSpan="3">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="81.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="46.0" prefWidth="628.0" text="Vehicle Sales Analysis Dashboard" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font name="Century Gothic Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label prefHeight="23.0" prefWidth="629.0" text="By Year, Quarter, Region, Vehicle" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="16.0" />
+         </padding>
+      </GridPane>
+      <GridPane GridPane.columnSpan="2" GridPane.rowIndex="2">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="51.0" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="83.0" minHeight="10.0" percentHeight="80.0" prefHeight="83.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="17.0" prefWidth="417.0" text="Filters">
+               <font>
+                  <Font name="Century Gothic Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </Label>
+            <GridPane fx:id="filtersGrid" prefWidth="413.0" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" percentWidth="23.0" prefWidth="53.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" percentWidth="77.0" prefWidth="145.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="17.0" prefWidth="417.0" text="Year:">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="17.0" prefWidth="417.0" text="Quarter:" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="17.0" prefWidth="417.0" text="Region:" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="17.0" prefWidth="417.0" text="Vehicle:" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox fx:id="hBoxYearChk" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <HBox fx:id="hBoxQtrChk" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <HBox fx:id="hBoxRegionChk" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <HBox fx:id="hBoxVehicleChk" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </GridPane>
+      <GridPane GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="51.0" minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="83.0" minHeight="10.0" percentHeight="80.0" prefHeight="83.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="88.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="324.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="39.0" prefWidth="86.0" text="Presets">
+                     <font>
+                        <Font name="Century Gothic Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </padding>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.valignment="CENTER">
+                     <children>
+                        <Button fx:id="btnQuarterly" mnemonicParsing="false" onAction="#setQuarterly" text="Quarterly">
+                           <HBox.margin>
+                              <Insets right="6.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnYearly" mnemonicParsing="false" onAction="#setYearly" text="Yearly">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+            <GridPane fx:id="presetsGrid" prefWidth="413.0" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" percentWidth="23.0" prefWidth="53.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" percentWidth="77.0" prefWidth="145.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="17.0" prefWidth="417.0" text="Year:">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="17.0" prefWidth="417.0" text="Quarter:" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="17.0" prefWidth="417.0" text="Region:" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="17.0" prefWidth="417.0" text="Vehicle:" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox fx:id="hBoxYearBtn" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <HBox fx:id="hBoxQtrBtn" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <HBox fx:id="hBoxRegionBtn" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <HBox fx:id="hBoxVehicleBtn" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </GridPane>
+      <GridPane GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="133.0" minHeight="10.0" percentHeight="15.0" prefHeight="78.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="133.0" minHeight="10.0" percentHeight="70.0" prefHeight="78.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label prefHeight="39.0" prefWidth="86.0" text="Table">
+               <font>
+                  <Font name="Century Gothic Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets top="8.0" />
+               </padding>
+            </Label>
+            <TableView fx:id="tableSales" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+            <GridPane GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="24.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <HBox fx:id="hBoxAgg" alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="289.0" GridPane.columnIndex="1" GridPane.valignment="CENTER">
+                     <children>
+                     </children>
+                  </HBox>
+                  <Label prefHeight="17.0" prefWidth="417.0" text="Aggregate By:">
+                     <font>
+                        <Font name="Century Gothic" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+      <Line endX="1168.2928466796875" endY="-2.0004796981811523" startX="-100.0" GridPane.columnSpan="6" GridPane.rowIndex="1" />
+      <PieChart fx:id="pieChart" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+      <BarChart fx:id="barChart" animated="false" GridPane.columnSpan="2" GridPane.rowIndex="4">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Sales Volume" side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <LineChart fx:id="salesTrend" animated="false" title="Sales Trend" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="3">
+        <xAxis>
+          <CategoryAxis label="Time" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Sales Volume" side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <LineChart fx:id="growthTrend" animated="false" title="Growth Percentage" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="4">
+         <xAxis>
+            <CategoryAxis label="Time" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis label="Growth (%)" side="LEFT" />
+         </yAxis>
+      </LineChart>
+   </children>
 </GridPane>

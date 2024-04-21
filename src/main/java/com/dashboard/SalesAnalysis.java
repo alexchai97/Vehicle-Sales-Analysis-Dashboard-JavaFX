@@ -52,66 +52,43 @@ public class SalesAnalysis {
         return summary;
     }
 
-    // Aggregate data function
-    public static HashMap<String, Integer> aggregateData(
-            ArrayList<SalesRecord> salesData, String delim,
-            int aggregateBy) {
-
-        // Set the default delimiter if not provided
+    public static HashMap<String, Integer> aggregateData(ArrayList<SalesRecord> salesData, String delim, boolean[] aggregateBy) {
         if (delim == null) {
             delim = " ";
         }
-
-        // Convert aggregateBy to a binary string
-        String binaryString = Integer.toBinaryString(aggregateBy);
-
-        // Pad the binary string with leading zeros to ensure it is 4 bits long
-        binaryString = String.format("%4s", binaryString).replace(' ', '0');
-
-        // Map to store the aggregated quantities
+        
         HashMap<String, Integer> qtyMap = new HashMap<>();
-
-        // Iterate through sales data
+    
         for (SalesRecord record : salesData) {
-            StringBuilder keyBuilder = new StringBuilder();
-
+            // Initialize an array of keys based on the record's properties
             String[] keys = new String[] {
-                    "" + record.Year, // Convert Year to String
-                    "Q" + record.QTR, // Combine 'Q' with the quarter
-                    record.Region, // Add the Region directly
-                    record.Vehicle // Add the Vehicle directly
+                String.valueOf(record.Year),
+                "Q" + record.QTR,
+                record.Region,
+                record.Vehicle
             };
-
-            // List to store the key parts
+    
             List<String> keyParts = new ArrayList<>();
-
-            // Iterate over the binary string and the keys array
-            for (int i = 0; i < binaryString.length(); i++) {
-                // If the binary string has a '1' at this position, add the corresponding key
-                // part
-                if (binaryString.charAt(i) == '1') {
+    
+            // Build the key using the specified aggregation keys
+            for (int i = 0; i < aggregateBy.length; i++) {
+                if (aggregateBy[i]) {
                     keyParts.add(keys[i]);
                 }
             }
-
-            // Join the key parts with a space to form the final key
+    
+            // Join key parts to form the key using the specified delimiter
             String key = String.join(delim, keyParts);
-
-            // If the key is empty, set it to "Total"
+    
             if (key.isEmpty()) {
                 key = "Total Sales";
             }
-
-            // Get the current quantity for the generated key, defaulting to 0
-            int currentQty = qtyMap.getOrDefault(key, 0);
-
-            // Add the record's quantity to the current quantity
-            currentQty += record.Quantity;
-
-            // Update the map with the new quantity
-            qtyMap.put(key, currentQty);
+    
+            // Aggregate quantity for the key
+            qtyMap.put(key, qtyMap.getOrDefault(key, 0) + record.Quantity);
         }
-
+    
         return qtyMap;
     }
+    
 }

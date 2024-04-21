@@ -16,8 +16,8 @@ public class SalesReader {
     public ArrayList<SalesRecord> salesData = new ArrayList<>();
 
     // To store unique set of values for the data
-    public Set<Integer> YearSet = new LinkedHashSet<>();
-    public Set<Integer> QuarterSet = new LinkedHashSet<>();
+    public Set<String> YearSet = new LinkedHashSet<>();
+    public Set<String> QuarterSet = new LinkedHashSet<>();
     public Set<String> RegionSet = new LinkedHashSet<>();
     public Set<String> VehicleSet = new LinkedHashSet<>();
 
@@ -62,11 +62,12 @@ public class SalesReader {
 
     private void initSets() {
         for (SalesRecord record : salesData) {
-            YearSet.add(record.Year);
-            QuarterSet.add(record.QTR);
+            YearSet.add("" + record.Year);
+            QuarterSet.add("Q" + record.QTR);
             RegionSet.add(record.Region);
             VehicleSet.add(record.Vehicle);
         }
+
     }
 
     public void saveDataToLocal(String filePath) {
